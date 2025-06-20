@@ -11,11 +11,14 @@
     <style>
         /* --- CSS Reset & Basic Setup --- */
         :root {
-            --primary-color: #00aaff; /* A vibrant blue for CTAs */
-            --secondary-color: #d1d1f7; /* Lighter text color */
-            --dark-bg: #03010f;       /* Deep space blue/black */
-            --card-bg: rgba(20, 15, 40, 0.6); /* Semi-transparent card background */
+            --primary-color: #00aaff;
+            --secondary-color: #d1d1f7;
+            --dark-bg: #03010f;
+            --card-bg: rgba(20, 15, 40, 0.6);
+            --input-bg: rgba(3, 1, 15, 0.5);
             --glow-color: rgba(0, 170, 255, 0.5);
+            --success-color: #28a745;
+            --error-color: #dc3545;
         }
 
         * {
@@ -32,51 +35,18 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--dark-bg);
             color: #ffffff;
-            overflow-x: hidden; /* Prevents horizontal scrollbar */
+            overflow-x: hidden;
         }
 
-        /* --- Parallax Background --- */
-        .parallax-container {
-            position: relative;
-            height: 100vh;
+        /* --- Hero Section --- */
+        .hero-section {
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            overflow: hidden; /* Crucial for parallax effect */
+            padding: 120px 20px 50px; /* Add padding for header */
         }
-
-        .parallax-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            transition: transform 0.2s ease-out; /* Smooths the parallax movement slightly */
-        }
-
-        #layer-1-stars {
-            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80');
-            z-index: 1;
-        }
-
-        #layer-2-nebula {
-            background-image: url('https://res.cloudinary.com/djtk8hbdz/image/upload/v1749444437/Green_and_Black_Modern_Soccer_Presentation_2_bnzmgf.jpg');
-            opacity: 0.7;
-            z-index: 2;
-        }
-
-        #layer-3-planet {
-            background-image: url('https://images.unsplash.com/photo-1610294334351-a93152d1396a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
-            background-size: contain; /* Contain to keep aspect ratio */
-            background-position: 20% 80%; /* Position the planet */
-            opacity: 0.9;
-            z-index: 3;
-        }
-
 
         /* --- Header & Navigation --- */
         .site-header {
@@ -112,7 +82,6 @@
             color: var(--primary-color);
         }
 
-
         /* --- Hero Content --- */
         .hero-content {
             z-index: 10;
@@ -146,6 +115,8 @@
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 0 20px var(--glow-color);
+            border: none;
+            cursor: pointer;
         }
 
         .cta-button:hover {
@@ -153,6 +124,12 @@
             box-shadow: 0 0 35px var(--glow-color);
         }
 
+        .cta-button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
 
         /* --- Content Sections --- */
         .content-section {
@@ -190,10 +167,10 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 40px 30px;
-            width: 100%; /* Make card take full width on mobile */
-            max-width: 320px; /* But not get too wide on tablets */
+            width: 100%;
+            max-width: 320px;
             text-align: center;
-            backdrop-filter: blur(10px); /* Frosted glass effect */
+            backdrop-filter: blur(10px);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -208,16 +185,45 @@
             margin-bottom: 20px;
             color: var(--primary-color);
         }
-        
+
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
-        
+
         .feature-card p {
             font-size: 1rem;
             color: var(--secondary-color);
             line-height: 1.6;
+        }
+
+        /* --- Styled Google Form Container (WITH HOVER EFFECT) --- */
+        .form-container {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative; /* Added for better transform behavior */
+            /* This transition makes the hover effect smooth */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .form-container:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-8px); /* Lifts the card up */
+            box-shadow: 0 15px 35px var(--glow-color); /* Adds a pronounced glow */
+        }
+
+        .google-form-iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            background: transparent;
+            color-scheme: dark;
         }
 
         /* --- Final CTA Section --- */
@@ -233,90 +239,46 @@
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .site-footer p {
             color: var(--secondary-color);
         }
-        
+
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
-            .site-header {
-                padding: 20px;
-                flex-direction: column;
-                gap: 15px;
-                background: rgba(3, 1, 15, 0.8); /* Add a solid background on mobile for readability */
+            .site-header { padding: 20px; flex-direction: column; gap: 15px; background: rgba(3, 1, 15, 0.8); }
+            .nav-links { display: flex; justify-content: center; flex-wrap: wrap; }
+            .nav-links a { margin: 5px 15px; }
+            .hero-section { min-height: 90vh; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .hero-content .subtitle { font-size: 1.2rem; }
+            .content-section { padding: 80px 25px; }
+            .section-title { font-size: 2.2rem; }
+            .section-subtitle { font-size: 1.1rem; margin-bottom: 40px; }
+            
+            .form-container {
+                padding: 30px 20px;
             }
-            .nav-links {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            .nav-links a {
-                margin: 5px 15px;
-            }
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-            .hero-content .subtitle {
-                font-size: 1.2rem;
-            }
-            .content-section {
-                padding: 80px 25px; /* Reduced padding for smaller screens */
-            }
-            .section-title {
-                font-size: 2.2rem;
-            }
-            .section-subtitle {
-                font-size: 1.1rem;
-                margin-bottom: 40px;
-            }
-            .final-cta-section {
-                padding: 80px 25px;
-            }
-            .site-footer {
-                padding: 30px 25px;
-            }
-        }
-        
-        /* Added a smaller breakpoint for mobile phones */
-        @media (max-width: 480px) {
-            body {
-                /* On small devices, disable parallax on scroll to save performance and prevent jumpiness */
-                /* This is a UX improvement */
-                overflow-y: scroll;
-            }
-            .parallax-container {
-                /* We can simplify the background for very small screens */
-                background: var(--dark-bg);
-                height: 90vh; /* Slightly reduce height */
-            }
-            .parallax-layer {
-                /* Hide complex layers on small phones to improve performance and clarity */
-                display: none;
-            }
-            #layer-1-stars {
-                /* Keep the stars for the space theme */
-                display: block;
-            }
-            .hero-content h1 {
-                font-size: 2.2rem;
-                letter-spacing: 1px;
-            }
-            .hero-content .subtitle {
-                font-size: 1rem;
-            }
-            .cta-button {
-                padding: 12px 28px;
-                font-size: 1rem;
-            }
-            .logo {
-                font-size: 1.5rem;
-            }
-            .section-title {
-                font-size: 2rem;
+            .google-form-iframe {
+                height: 1000px;
             }
         }
 
+        @media (max-width: 480px) {
+            .hero-section { min-height: 80vh; }
+            .hero-content h1 { font-size: 2.2rem; letter-spacing: 1px; }
+            .hero-content .subtitle { font-size: 1rem; }
+            .cta-button { padding: 12px 28px; font-size: 1rem; }
+            .logo { font-size: 1.5rem; }
+            .section-title { font-size: 2rem; }
+            
+            .form-container {
+                padding: 25px 15px;
+            }
+            .google-form-iframe {
+                height: 1200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -326,17 +288,13 @@
         <nav class="nav-links">
             <a href="#features">Features</a>
             <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="#feedback-form">Contact</a>
         </nav>
     </header>
 
     <main>
-        <!-- Parallax Hero Section -->
-        <section class="parallax-container">
-            <div id="layer-1-stars" class="parallax-layer"></div>
-            <div id="layer-2-nebula" class="parallax-layer"></div>
-            <div id="layer-3-planet" class="parallax-layer"></div>
-
+        <!-- Hero Section -->
+        <section class="hero-section">
             <div class="hero-content">
                 <h1>Your Football Universe</h1>
                 <p class="subtitle">The ultimate dashboard for clubs, coaches, and players. Analyze data, track performance, and reach for the stars.</p>
@@ -348,28 +306,20 @@
         <section id="features" class="content-section">
             <h2 class="section-title">A Dashboard for Everyone</h2>
             <p class="section-subtitle">Whether you manage a team, coach the next generation, or are a player striving for greatness, we have a universe of data waiting for you.</p>
-
             <div class="features-grid">
-                <!-- Club Dashboard Card -->
-                <div class="feature-card">
-                    <div class="icon">🏟️</div>
-                    <h3>For The Club</h3>
-                    <p>Oversee all team operations, manage finances, track fan engagement, and make strategic, data-driven decisions from a single, powerful command center.</p>
-                </div>
+                <div class="feature-card"><div class="icon">🏟️</div><h3>For The Club</h3><p>Oversee all team operations, manage finances, track fan engagement, and make strategic, data-driven decisions from a single, powerful command center.</p></div>
+                <div class="feature-card"><div class="icon">📈</div><h3>For The Coach</h3><p>Dive deep into player stats, design winning tactics, analyze match footage, and monitor player fitness to gain a competitive edge.</p></div>
+                <div class="feature-card"><div class="icon">⚽</div><h3>For The Player</h3><p>Track your personal performance, view your highlights, understand your strengths and weaknesses, and chart your career path to the top.</p></div>
+            </div>
+        </section>
 
-                <!-- Coach Dashboard Card -->
-                <div class="feature-card">
-                    <div class="icon">📈</div>
-                    <h3>For The Coach</h3>
-                    <p>Dive deep into player stats, design winning tactics, analyze match footage, and monitor player fitness to gain a competitive edge.</p>
-                </div>
-
-                <!-- Player Dashboard Card -->
-                <div class="feature-card">
-                    <div class="icon">⚽</div>
-                    <h3>For The Player</h3>
-                    <p>Track your personal performance, view your highlights, understand your strengths and weaknesses, and chart your career path to the top.</p>
-                </div>
+        <!-- EMBEDDED GOOGLE FORM SECTION -->
+        <section id="feedback-form" class="content-section">
+            <h2 class="section-title">Shape the Future of Football Tech</h2>
+            <p class="section-subtitle">We're building the ultimate football dashboard and we want your expertise.</p>
+            
+            <div class="form-container">
+                <iframe class="google-form-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLScylTFoGdl8DP6gqgD1RThElJkWvKhVDq7D4Hv6BAPTRE3OTw/viewform?embedded=true">Loading…</iframe>
             </div>
         </section>
 
@@ -379,7 +329,6 @@
              <p class="section-subtitle">Join the revolution in football analytics. Your journey to peak performance starts with a single click.</p>
              <a href="https://yemanth-sai-kumar-1.github.io/Football-Dashboard/" class="cta-button">Get Started for Free</a>
         </section>
-
     </main>
 
     <footer class="site-footer">
@@ -387,26 +336,38 @@
     </footer>
 
     <script>
-        // --- Parallax Scroll Effect Script ---
-        const isMobile = window.matchMedia("only screen and (max-width: 480px)").matches;
-
-        // Only run the parallax script if it's not a small mobile device
-        if (!isMobile) {
-            document.addEventListener('scroll', function() {
-                const scrollPosition = window.pageYOffset;
-                
-                const layer1 = document.getElementById('layer-1-stars');
-                const layer2 = document.getElementById('layer-2-nebula');
-                const layer3 = document.getElementById('layer-3-planet');
-                
-                // Adjust the multiplier for more/less parallax effect
-                // Slower layers have smaller multipliers
-                if (layer1) layer1.style.transform = `translateY(${scrollPosition * 0.1}px)`;
-                if (layer2) layer2.style.transform = `translateY(${scrollPosition * 0.3}px)`;
-                if (layer3) layer3.style.transform = `translateY(${scrollPosition * 0.6}px)`;
-            });
-        }
+        // --- Force Dark Theme for Google Form ---
+        // Note: This might not work reliably due to cross-origin browser security policies,
+        // but it's a progressive enhancement attempt.
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.querySelector('.google-form-iframe');
+            if (iframe) {
+                iframe.onload = function() {
+                    try {
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        iframeDoc.body.style.backgroundColor = 'transparent';
+                        iframeDoc.body.style.color = '#ffffff';
+                        
+                        // Find and style form elements
+                        const inputs = iframeDoc.querySelectorAll('input, textarea, select');
+                        inputs.forEach(input => {
+                            input.style.backgroundColor = 'rgba(3, 1, 15, 0.5)';
+                            input.style.color = '#ffffff';
+                            input.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                        });
+                        
+                        // Style submit button
+                        const submitBtn = iframeDoc.querySelector('div[role="button"]');
+                        if (submitBtn) {
+                            submitBtn.style.backgroundColor = 'var(--primary-color)';
+                            submitBtn.style.color = '#ffffff';
+                        }
+                    } catch (e) {
+                        console.warn('Could not style the cross-origin Google Form iframe due to security restrictions.');
+                    }
+                };
+            }
+        });
     </script>
-
 </body>
 </html>
