@@ -36,7 +36,6 @@
             background-color: var(--dark-bg);
             color: #ffffff;
             overflow-x: hidden;
-            /* NEW: Animated starfield background */
             background-image:
                 radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
                 radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
@@ -52,7 +51,6 @@
             to {background-position: -10000px 5000px, -10000px 5000px, -10000px 5000px, -10000px 5000px;}
         }
 
-        /* NEW: Scroll-triggered fade-in animation */
         @keyframes fade-up {
             from {
                 opacity: 0;
@@ -64,16 +62,13 @@
             }
         }
 
-        /* Class to apply the animation */
         .animated-section {
             animation: fade-up 0.8s ease-out forwards;
-            /* Start with element hidden */
             opacity: 0;
             animation-timeline: view();
             animation-range-start: entry 10%;
             animation-range-end: entry 40%;
         }
-
 
         /* --- Hero Section --- */
         .hero-section {
@@ -84,8 +79,7 @@
             text-align: center;
             padding: 120px 20px 50px;
             position: relative;
-            /* NEW: Parallax background effect */
-            background: linear-gradient(rgba(3,1,15,0.7), rgba(3,1,15,0.7)), url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80') center/cover no-repeat;
+            background: linear-gradient(rgba(3,1,15,0.8), rgba(3,1,15,0.8)), url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80') center/cover no-repeat;
             background-attachment: fixed;
         }
 
@@ -135,7 +129,7 @@
             font-weight: 700;
             margin-bottom: 10px;
             letter-spacing: 2px;
-            animation: fade-up 1s ease-out; /* Add animation to hero title */
+            animation: fade-up 1s ease-out;
         }
 
         .hero-content .subtitle {
@@ -144,11 +138,11 @@
             color: var(--secondary-color);
             max-width: 600px;
             margin: 0 auto 30px auto;
-            animation: fade-up 1s ease-out 0.3s; /* Add animation to hero subtitle */
-            animation-fill-mode: backwards; /* Ensures it's hidden before animation starts */
+            animation: fade-up 1s ease-out 0.3s;
+            animation-fill-mode: backwards;
         }
         
-        /* CTA Button (used in feedback section) */
+        /* CTA Button Styling */
         .cta-button {
             display: inline-block;
             background: var(--primary-color);
@@ -162,6 +156,13 @@
             box-shadow: 0 0 20px var(--glow-color);
             border: 1px solid transparent;
             cursor: pointer;
+        }
+        
+        /* MODIFIED: Specific styling for the button inside the hero */
+        .hero-content .cta-button {
+            margin-top: 40px; /* Adds space above the button */
+            animation: fade-up 1s ease-out 0.6s;
+            animation-fill-mode: backwards;
         }
 
         .cta-button:hover {
@@ -214,7 +215,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
-        /* Applying staggered animation delay to cards */
         .feature-card:nth-child(1) { animation-delay: 0.1s; }
         .feature-card:nth-child(2) { animation-delay: 0.2s; }
         .feature-card:nth-child(3) { animation-delay: 0.3s; }
@@ -245,7 +245,6 @@
         /* --- Final CTA Section --- */
         .final-cta-section {
             background: linear-gradient(rgba(3,1,15,0.8), rgba(3,1,15,0.8)), url('https://images.unsplash.com/photo-1504333638930-c8787321eee0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-            /* NEW: Parallax effect */
             background-attachment: fixed;
             padding: 100px 50px;
         }
@@ -267,13 +266,13 @@
             .site-header { padding: 20px; flex-direction: column; gap: 15px; background: rgba(3, 1, 15, 0.8); }
             .nav-links { display: flex; justify-content: center; flex-wrap: wrap; }
             .nav-links a { margin: 5px 15px; }
-            .hero-section { min-height: 90vh; background-attachment: scroll; /* Disable parallax on mobile for performance */}
+            .hero-section { min-height: 90vh; background-attachment: scroll; }
             .hero-content h1 { font-size: 2.8rem; }
             .hero-content .subtitle { font-size: 1.2rem; }
             .content-section { padding: 80px 25px; }
             .section-title { font-size: 2.2rem; }
             .section-subtitle { font-size: 1.1rem; margin-bottom: 40px; }
-            .final-cta-section { background-attachment: scroll; /* Disable parallax on mobile for performance */ }
+            .final-cta-section { background-attachment: scroll; }
         }
 
         @media (max-width: 480px) {
@@ -293,48 +292,41 @@
         <nav class="nav-links">
             <a href="#features">Features</a>
             <a href="#">About</a>
-            <a href="#feedback-form">Contact</a>
+            <!-- "Contact" link removed for cleanliness -->
         </nav>
     </header>
 
     <main>
-        <!-- Hero Section -->
+        <!-- Hero Section with Integrated Call-to-Action -->
         <section class="hero-section">
             <div class="hero-content">
                 <h1>Welcome To Football Dashboard</h1>
                 <p class="subtitle">The ultimate dashboard for clubs, coaches, and players. Analyze data, track performance, and reach for the stars.</p>
-               
+                
+                <!-- The button is now inside the hero section -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScylTFoGdl8DP6gqgD1RThElJkWvKhVDq7D4Hv6BAPTRE3OTw/viewform" target="_blank" rel="noopener noreferrer" class="cta-button">
+                    But we need your help!
+                </a>
             </div>
         </section>
 
         <!-- Features Section -->
         <section id="features" class="content-section">
             <h2 class="section-title animated-section">A Dashboard for Everyone</h2>
-            <p class="section-subtitle animated-section">Whether you manage a team, coach the next generation, or are a player striving for greatness, we have a universe of data waiting for you.</p>
+            <p class="section-subtitle animated-section">We're building a universe of data for every role in the beautiful game. Here's a glimpse of what's possible.</p>
             <div class="features-grid">
-                <!-- Added .animated-section class to cards for scroll effect -->
                 <div class="feature-card animated-section"><div class="icon">🏟️</div><h3>For The Club</h3><p>Oversee all team operations, manage finances, track fan engagement, and make strategic, data-driven decisions from a single, powerful command center.</p></div>
                 <div class="feature-card animated-section"><div class="icon">📈</div><h3>For The Coach</h3><p>Dive deep into player stats, design winning tactics, analyze match footage, and monitor player fitness to gain a competitive edge.</p></div>
                 <div class="feature-card animated-section"><div class="icon">⚽</div><h3>For The Player</h3><p>Track your personal performance, view your highlights, understand your strengths and weaknesses, and chart your career path to the top.</p></div>
             </div>
         </section>
 
-        <!-- MODIFIED: Feedback/Help Section -->
-        <section id="feedback-form" class="content-section">
-            <h2 class="section-title animated-section">Shape The Future</h2>
-            <!-- Text changed as requested -->
-            <p class="section-subtitle animated-section">We want to build the ultimate dashboard for clubs, coaches, and players. Analyze data, track performance, and reach for the stars.</p>
-            <!-- New button linking to Google Form -->
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScylTFoGdl8DP6gqgD1RThElJkWvKhVDq7D4Hv6BAPTRE3OTw/viewform" target="_blank" rel="noopener noreferrer" class="cta-button animated-section">
-                But we need your help!
-            </a>
-        </section>
+        <!-- The "Shape the Future" section has been removed as it is now integrated above -->
 
         <!-- Final CTA Section -->
         <section class="final-cta-section content-section">
-             <h2 class="section-title animated-section">Ready to Launch?</h2>
-             <p class="section-subtitle animated-section">Join the revolution in football analytics. Your journey to peak performance starts with a single click.</p>
-             <!-- "Get Started" button removed as requested -->
+             <h2 class="section-title animated-section">The Future is Data-Driven</h2>
+             <p class="section-subtitle animated-section">Join the revolution in football analytics. Your journey to peak performance starts with your insights.</p>
         </section>
     </main>
 
@@ -342,6 +334,5 @@
         <p>© 2025 Football Dashboard All Rights Reserved. Explore the cosmos of football.</p>
     </footer>
 
-    
 </body>
 </html>
